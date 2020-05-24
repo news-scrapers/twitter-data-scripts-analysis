@@ -13,6 +13,9 @@ subject-classification-spanish = "*"
 numpy = "*"
 sentiment-analysis-spanish = "*"
 sklearn = "*"
+altair = "*"
+fbprophet = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.7"
