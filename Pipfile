@@ -11,11 +11,11 @@ tensorflow = "*"
 pandas = "*"
 subject-classification-spanish = "*"
 numpy = "*"
-sentiment-analysis-spanish = "*"
 sklearn = "*"
 altair = "*"
 fbprophet = "*"
 ipython = "*"
+sentiment-analysis-spanish = "*"
 
 [requires]
 python_version = "3.7"

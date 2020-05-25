@@ -48,7 +48,7 @@ def group_data(df, filename):
 
 
 def classify_and_sentiment_dir():
-    filename = "tweets_sentiment-data-scraper_asociaciones_2016-2020.csv"
+    filename = "tweets_sentimentdata-scraper_asociaciones_2016-2020.csv"
     df = pd.read_csv(directory+"/" +filename, sep=";")
     group_data(df, filename)
 

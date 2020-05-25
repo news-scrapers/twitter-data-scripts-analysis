@@ -39,10 +39,12 @@ def classify_and_sentiment(df, filename):
 
     print("calculating sentiment")
     df_sentiment = df_base
+    df_sentiment['text'] = df_sentiment['text'].map(lambda x: x.replace("#"," "))
+
     df_sentiment['sentiment'] = df_sentiment.apply(lambda row: sentiment_row(row), axis=1)
     df_sentiment = df_sentiment[["id", "date", "text","sentiment"]]
     df_sentiment.to_csv(output_dir+"/tweets_sentiment" +filename, sep=";")
-
+"""
     print("calculating main tags classification")
     df_subjects = df_base
     df_subjects['subjects_probabilities_array'] = df_subjects.apply(lambda row: subjects_probability_join(row), axis=1)
@@ -53,10 +55,11 @@ def classify_and_sentiment(df, filename):
 
     df_subjects = df_subjects[["id", "date","text", "main_tags","subjects", 'subjects_probabilities_array']]
     df_subjects.to_csv(output_dir+"/tweets_subjects_" + filename, sep=";")
-
+"""
     
 if __name__== "__main__":
     filename = "data-scraper_asociaciones_2016-2020.csv"
+    #filename = "data-scraper_ibex_2018-2020.csv"
     df = pd.read_csv(directory+"/"+ filename,sep=";")
     df['text'] =  df['text'].astype(str)
     print(df)
