@@ -749,11 +749,11 @@
         },
         "sentiment-analysis-spanish": {
             "hashes": [
-                "sha256:d8fc457b8406b7f20a624b112eb79c1e102903a656bfa680432ccc30463c8fff",
-                "sha256:e69aa76b8f46a9d10172d5adf4318b9e888ff89d721aa90a7afb273f0d4d7925"
+                "sha256:ba829530a99d09ed807c7a8c7f4880842d6eacb2f315dfc7adb7b6d42cf500e7",
+                "sha256:c2aa6a33fbbfc277294586db82f61060480d531d03d445b847163a1735cb186b"
             ],
             "index": "pypi",
-            "version": "==0.0.21"
+            "version": "==0.0.23"
         },
         "setuptools-git": {
             "hashes": [

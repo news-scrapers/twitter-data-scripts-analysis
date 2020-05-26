@@ -16,7 +16,7 @@ def calculate_trimester (row):
 
 def group_data(df, filename):
     
-    df_grouped = df[["date","sentiment"]]
+    df_grouped = df[["date","sentiment", "sentiment_truncated"]]
 
 
     #print("adding concat tag probab")
@@ -48,7 +48,8 @@ def group_data(df, filename):
 
 
 def classify_and_sentiment_dir():
-    filename = "tweets_sentimentdata-scraper_asociaciones_2016-2020.csv"
+    #filename = "tweets_sentimentdata-scraper_asociaciones_2016-2020.csv"
+    filename = "tweets_sentimentdata-scraper_ibex_2018-2020.csv"
     df = pd.read_csv(directory+"/" +filename, sep=";")
     group_data(df, filename)
 

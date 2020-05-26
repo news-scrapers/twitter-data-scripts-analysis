@@ -33,16 +33,26 @@ def main_tags(row):
 def sentiment_row(row):
     return sentiment.sentiment(row['text'])
 
+def sentiment_truncated(row):
+    sent = row['sentiment']
+    if sent < 0.001:
+        return 0
+    elif sent > 0.5:
+        return 1
+    else:
+        return 0.5
+
 def classify_and_sentiment(df, filename):
     
     df_base = df[["id", "date", "text"]]
 
     print("calculating sentiment")
     df_sentiment = df_base
-    df_sentiment['text'] = df_sentiment['text'].map(lambda x: x.replace("#"," "))
+    #∫df_sentiment['text'] = df_sentiment['text'].map(lambda x: x.replace("#"," "))
 
     df_sentiment['sentiment'] = df_sentiment.apply(lambda row: sentiment_row(row), axis=1)
-    df_sentiment = df_sentiment[["id", "date", "text","sentiment"]]
+    df_sentiment['sentiment_truncated'] = df_sentiment.apply(lambda row: sentiment_truncated(row), axis=1)
+    df_sentiment = df_sentiment[["id", "date", "text","sentiment", "sentiment_truncated"]]
     df_sentiment.to_csv(output_dir+"/tweets_sentiment" +filename, sep=";")
 """
     print("calculating main tags classification")
