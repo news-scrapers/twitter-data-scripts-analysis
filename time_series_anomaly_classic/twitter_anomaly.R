@@ -3,6 +3,7 @@ data_asoc <- read.csv("./data/grouped_data_month_mean_tweets_sentimentdata-scrap
 data_asoc_day <- read.csv("./data/grouped_data_day_mean_tweets_sentimentdata-scraper_asociaciones_2016-2020.csv",  header=TRUE, sep=";", stringsAsFactors = TRUE)
 data_ibex_day <- read.csv("./data/grouped_data_day_mean_tweets_sentimentdata-scraper_ibex_2018-2020.csv",  header=TRUE, sep=";", stringsAsFactors = TRUE)
 data_ibex <- read.csv("./data/grouped_data_month_mean_tweets_sentimentdata-scraper_ibex_2018-2020.csv",  header=TRUE, sep=";", stringsAsFactors = TRUE)
+data_precios_ibex <- read.csv("./data/ibex_historico.csv",  header=TRUE, sep=",", stringsAsFactors = TRUE)
 library(lubridate)
 #data_day$normalised_date <- ymd(data_day$normalised_date)
 
@@ -55,5 +56,17 @@ res = AnomalyDetectionTs(df, max_anoms=0.03, direction='both',alpha=0.1, plot=TR
 res$anoms
 res$plot
 help(AnomalyDetectionTs)
+
+
+
+#WHinte walk
+
+acf(diff(data_asoc_day$sentiment))
+
+acf(data_asoc_day$sentiment)
+acf(data_ibex_day$sentiment)
+
+ccf(data_ibex_day$sentiment, data_precios_ibex$Close)
+ccf(data_asoc_day$sentiment, data_precios_ibex$Close)
 
 
