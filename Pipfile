@@ -16,6 +16,7 @@ altair = "*"
 fbprophet = "*"
 ipython = "*"
 sentiment-analysis-spanish = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"
