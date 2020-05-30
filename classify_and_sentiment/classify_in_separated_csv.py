@@ -44,7 +44,7 @@ def sentiment_truncated(row):
 
 def classify_and_sentiment(df, filename):
     
-    df_base = df[["id", "date", "text"]]
+    df_base = df[["id", "date", "text", "favorites", "retweets","replies"]]
 
     print("calculating sentiment")
     df_sentiment = df_base
@@ -52,7 +52,7 @@ def classify_and_sentiment(df, filename):
 
     df_sentiment['sentiment'] = df_sentiment.apply(lambda row: sentiment_row(row), axis=1)
     df_sentiment['sentiment_truncated'] = df_sentiment.apply(lambda row: sentiment_truncated(row), axis=1)
-    df_sentiment = df_sentiment[["id", "date", "text","sentiment", "sentiment_truncated"]]
+    df_sentiment = df_sentiment[["id", "date", "text","sentiment", "sentiment_truncated", "favorites", "retweets","replies"]]
     df_sentiment.to_csv(output_dir+"/tweets_sentiment" +filename, sep=";")
 """
     print("calculating main tags classification")
