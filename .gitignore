@@ -10,7 +10,7 @@ news_subjects.csv
 news_sentiment.csv
 news_crime.csv
 grouped_data_subjects_*.csv
-*.csv
+#*.csv
 news_domestic_violence.csv
 *corona.json
 # Diagnostic reports (https://nodejs.org/api/report.html)

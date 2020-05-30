@@ -22,6 +22,7 @@ data_asoc_month$sentiment_diff <- append(diff(data_asoc_month$sentiment), 0, aft
 ggplot(data_ecoicop, aes(date, indice_general)) + geom_line() + xlab("") + ylab("")
 ggplot(data_ibex_month, aes(month_year, sentiment_diff)) + geom_line() + xlab("") + ylab("")
 ggplot(data_ibex_month, aes(month_year, sentiment)) + geom_line() + xlab("") + ylab("")
+ggplot(data_ibex_month, aes(month_year, favorites)) + geom_line() + xlab("") + ylab("")
 
 
 ts.plot(diff(data_ecoicop$indice_general),  main = "" )
