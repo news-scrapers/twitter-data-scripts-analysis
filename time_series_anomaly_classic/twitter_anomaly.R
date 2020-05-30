@@ -70,3 +70,9 @@ ccf(data_ibex_day$sentiment, data_precios_ibex$Close)
 ccf(data_asoc_day$sentiment, data_precios_ibex$Close)
 
 
+
+hist(data_asoc_day$sentiment)
+plot(data_asoc$sentiment)
+plot(diff(data_asoc$sentiment))
+
+

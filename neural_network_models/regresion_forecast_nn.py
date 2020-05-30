@@ -11,6 +11,8 @@ from keras.preprocessing.sequence import pad_sequences
 import pandas as pd
 import numpy as np
 import pickle
+from matplotlib import pyplot
+
 #https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/
 
 
@@ -75,10 +77,10 @@ def save_model(model):
         print("saving model")
         # serialize model to JSON
         model_json = model.to_json()
-        with open("../data/model.json", "w") as json_file:
+        with open("../data/model_lstm.json", "w") as json_file:
             json_file.write(model_json)
         # serialize weights to HDF5
-        model.save_weights("../data/model.h5")
+        model.save_weights("../data/model_lstm.h5")
         print("Saved model to disk")
 
 if __name__== "__main__":
@@ -97,9 +99,8 @@ if __name__== "__main__":
     df_total = df_total.dropna()
 
     
-    num_steps = 20
-    future_steps = 2
-
+    num_steps = 7
+    future_steps = 1
     X_sent_asoc = df_total["sentiment_asociacones"].values[:-future_steps]
     X_sent_ibex = df_total["sentiment_ibex"].values[:-future_steps]
     X_ibex_prices = df_total["Close"].values[:-future_steps]
@@ -136,4 +137,6 @@ if __name__== "__main__":
     print(df_total.tail(future_steps+1))
     print(X_val)
     print(yhat)
+
+    
     #yhat = yhat[0]
