@@ -71,7 +71,8 @@ if __name__== "__main__":
 
     #filename = "data-scraper_asociaciones_2016-2020.csv"
     #filename = "data-scraper_ibex_2018-2020.csv"
-    filename = "data-scraper_asociaciones_peru-2016-2020.csv"
+    filename = "data-scraper_empresas_peru.csv"
+    #filename = "data-scraper_asociaciones_peru-2016-2020.csv"
     df = pd.read_csv(directory+"/"+ filename,sep=";")
     df['text'] =  df['text'].astype(str)
     print(df)
