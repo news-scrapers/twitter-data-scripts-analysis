@@ -44,12 +44,13 @@ def sentiment_truncated(row):
 
 def classify_and_sentiment(df, filename):
     
-    df_base = df[["id", "date", "text", "favorites", "retweets","replies"]]
+    df_base = df[["id", "date", "text", "favorites", "to", "retweets","replies"]]
 
     print("calculating sentiment")
     df_sentiment = df_base
     #∫df_sentiment['text'] = df_sentiment['text'].map(lambda x: x.replace("#"," "))
-
+    df_sentiment = df_sentiment[df_sentiment['to'].isnull()]
+    print(df_sentiment)
     df_sentiment['sentiment'] = df_sentiment.apply(lambda row: sentiment_row(row), axis=1)
     df_sentiment['sentiment_truncated'] = df_sentiment.apply(lambda row: sentiment_truncated(row), axis=1)
     df_sentiment = df_sentiment[["id", "date", "text","sentiment", "sentiment_truncated", "favorites", "retweets","replies"]]
@@ -71,9 +72,8 @@ if __name__== "__main__":
 
     #filename = "data-scraper_asociaciones_2016-2020.csv"
     #filename = "data-scraper_ibex_2018-2020.csv"
-    filename = "data-scraper_empresas_peru_2018-2020.csv"
+    filename = "data-scraper_empresas_peru_2017-2020.csv"
     #filename = "data-scraper_asociaciones_peru-2016-2020.csv"
     df = pd.read_csv(directory+"/"+ filename,sep=";")
     df['text'] =  df['text'].astype(str)
-    print(df)
     classify_and_sentiment(df, filename)
