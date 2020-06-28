@@ -20,6 +20,7 @@ sentiment-analysis-spanish = "*"
 matplotlib = "*"
 statsmodels = "*"
 "sklearn.utils" = "*"
+pydot = "*"
 
 [requires]
 python_version = "3.7"
