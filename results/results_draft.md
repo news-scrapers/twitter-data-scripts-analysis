@@ -39,8 +39,22 @@ Using the neural network sentiment model described in the previous section, we p
 
 This transforms the data into a time series that we can study and compare to macro economic data. In particular we obtain four time series: daily sentiment of main comanies and business associations both in Spain and Peru.
 
-The four time series are the starting point in our analysis and modeling process. This is the shape that they have
+The four time series are the starting point in our analysis and modeling process. See figure 1
+
+![](plots_sentiment.png) 
+**figure 1**
+
 
 # Results
+
+## Prediction of Madrid and Lima stocks change using traditional models
+
+We use the daily average sentiment data described in the previous section to predict the fluctuations of stock values.
+
+First, we see that the daily average sentiment is a stationary time series ()
+
+
+## Prediction of Madrid and Lima stocks change using neural networks models
+
 
 
