@@ -51,7 +51,15 @@ The four time series are the starting point in our analysis and modeling process
 
 We use the daily average sentiment data described in the previous section to predict the fluctuations of stock values.
 
-First, we see that the daily average sentiment is a stationary time series ()
+First, we see that the daily average sentiment is a stationary time series. This are the p-values of the Dicker-Fuller test for the four time series
+||daily variation sentiment business asociation| daily variation sentiment main companies|
+|-|-|-|
+|Spain|3.541674e-23|3.280194e-26 |
+|Peru|1.237495e-22| |
+
+So we obtain that the four time series are stationary.
+
+ (Dicker-Fuller test p-value 3.541674e-23 for average sentiment asociations )
 
 
 ## Prediction of Madrid and Lima stocks change using neural networks models
