@@ -10,9 +10,9 @@
 
 For the consecution of this project we extracted 
 * 120K tweets from the 40 main business association accounts in Spain
-* 269K tweets from the 35 main companies in spain (ibex 35) in Spain
-* 17K tweets from the 30 main business association accounts in Perú
-* 72K tweets from the 20 main companies in spain (ibex 35) in Spain
+* 269K tweets from the 35 main companies (ibex 35) in Spain
+* 17K tweets from the 30 main business association accounts in Peru
+* 72K tweets from the 20 main companies in Peru
 
 These tweets cover the period dated from january 2017 to march 2020.
 
@@ -52,17 +52,65 @@ The four time series are the starting point in our analysis and modeling process
 We use the daily average sentiment data described in the previous section to predict the fluctuations of stock values.
 
 First, we see that the daily average sentiment is a stationary time series. This are the p-values of the Dicker-Fuller test for the four time series
-||daily variation sentiment business asociation| daily variation sentiment main companies|
+|p-value| results daily variation sentiment business asociation| results daily variation sentiment main companies|
 |-|-|-|
 |Spain|3.541674e-23|3.280194e-26 |
-|Peru|1.237495e-22| |
+|Peru|0.000116|0.002758 |
 
-So we obtain that the four time series are stationary.
+So we obtain that the four time series are stationary. 
 
- (Dicker-Fuller test p-value 3.541674e-23 for average sentiment asociations )
+Using a VAR model to predict the variation of stocks change one day in advance from the variation in the sentiment both for business associations and companies, we obtain a MAE (mean absolute error) of 0.8735 for Spain and 0.5212 for Peru
+
+
+Nevertheless, we see that there is a great volatility in the months of COVID-19 pandemic, so removing those three months (february, march and april 2020) we see that the model performs much better in terms of MSE: 0.6931 for Spain and 0.5101 for Peru.
+
+figure 2 shows the sock values (removing the pandemic months) in blue and the prediction in orange.
+
+![](forecast_classic.png) 
+
+
+
+
+
+<!--
+Which means that we are in the conditions of studying Granger causality and VAR models.
+
+This are the p-values of the Granger causality test of the daily variation of sentiment and the prize change in the stock value (Madrid and Lima respectively)
+
+ 
+|p-value| variation sentiment business association vs variation stock prize|  variation sentiment main companies vs variation stock prize|
+|-|-|-|
+|Spain|0.8397|0.0959 |
+|Peru|0.1877|0.3463 |
+
+As we see, this high p-values do not allow us to conclude that there is causality. Nevertheless, considering only the data before the covid pandemic (prior to february 2020), we get the following p-values in the Granger causality test
+
+|p-value| variation sentiment business association vs variation stock prize|  variation sentiment main companies vs variation stock prize|
+|-|-|-|
+|Spain|0.0574|0.3672 |
+|Peru|0.4971|0.2922 |
+-->
+
 
 
 ## Prediction of Madrid and Lima stocks change using neural networks models
 
+Neural network models present a different approach to forecasting time series. We compare LTSM neural networks and Convolutional neural network models.
+
+The model forecasts a day in advance using a window of the previous
+
+||LSTM mean absolute error|Convolutional networks mean absolute error|
+|-|-|-|
+|Madrid stocks|0.7061|0.8172
+|Lima stocks  |0.7529| 0.6754
+
+
+
+As we did with the VAR models, due to the high volatility during the COVID months, it makes sense to repeat the training of the model using only the data from the months prior to the pandemic. This are the results obtained
+
+||LSTM mean absolute error|Convolutional networks mean absolute error|
+|-|-|-|
+|Madrid stocks|0.5030| 0.6908
+|Lima stocks  |0.5459| 0.5576
 
 
