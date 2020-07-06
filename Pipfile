@@ -4,23 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-ipykernel = "*"
 
 [packages]
-keras = "*"
-tensorflow = "*"
+jupyter = "*"
+scikit-learn = "*"
 pandas = "*"
-subject-classification-spanish = "*"
 numpy = "*"
-sklearn = "*"
-altair = "*"
-fbprophet = "*"
-ipython = "*"
-sentiment-analysis-spanish = "*"
-matplotlib = "*"
 statsmodels = "*"
-"sklearn.utils" = "*"
-pydot = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"
