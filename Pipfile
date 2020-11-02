@@ -12,6 +12,8 @@ pandas = "*"
 numpy = "*"
 statsmodels = "*"
 matplotlib = "*"
+keras = "*"
+tensorflow = "*"
 
 [requires]
 python_version = "3.7"
