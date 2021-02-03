@@ -11,6 +11,12 @@ news_sentiment.csv
 news_crime.csv
 grouped_data_subjects_*.csv
 #*.csv
+
+*asoc_peru.csv
+*asociaciones_empresariales.csv
+*empresas_peru.csv
+*ibex35.csv
+
 news_domestic_violence.csv
 *corona.json
 # Diagnostic reports (https://nodejs.org/api/report.html)
