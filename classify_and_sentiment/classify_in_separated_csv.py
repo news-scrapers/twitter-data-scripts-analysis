@@ -1,5 +1,5 @@
 from sentiment_analysis_spanish import sentiment_analysis
-from subject_classification_spanish import subject_classifier
+#from subject_classification_spanish import subject_classifier
 
 import os
 import pandas as pd
@@ -11,36 +11,12 @@ output_dir = '../data'
 sentiment = sentiment_analysis.SentimentAnalysisSpanish()
 #print(sentiment.sentiment("me gusta la tombola es genial"))
 
-subject_class = subject_classifier.SubjectClassifier()
-subject_class_main_tags = subject_classifier.SubjectClassifier(use_main_tags_only=True)
+#subject_class = subject_classifier.SubjectClassifier()
+#subject_class_main_tags = subject_classifier.SubjectClassifier(use_main_tags_only=True)
 
-
-def subjects_join(row):
-    return "--".join(list(subject_class.classify(row['text']).keys()))
-
-def subjects_probability_join(row):
-    classification_list = subject_class.obtain_raw_probabilities(row['text'])[0]
-    return "--".join(str(e) for e in classification_list)
-
-def main_tags_probability_join(row):
-    classification_list = subject_class_main_tags.obtain_raw_probabilities(row['text'])[0]
-    return "--".join(str(e) for e in classification_list)
-
-
-def main_tags(row):
-    return subject_class_main_tags.classify(row['text'])
 
 def sentiment_row(row):
     return sentiment.sentiment(row['text'])
-
-def sentiment_truncated(row):
-    sent = row['sentiment']
-    if sent < 0.001:
-        return 0
-    elif sent > 0.5:
-        return 1
-    else:
-        return 0.5
 
 def classify_and_sentiment(df, filename):
     
@@ -49,24 +25,21 @@ def classify_and_sentiment(df, filename):
     print("calculating sentiment")
     df_sentiment = df_base
     #∫df_sentiment['text'] = df_sentiment['text'].map(lambda x: x.replace("#"," "))
-    df_sentiment = df_sentiment[df_sentiment['reply_to'].isnull()]
-    print(df_sentiment)
-    df_sentiment['sentiment'] = df_sentiment.apply(lambda row: sentiment_row(row), axis=1)
-    df_sentiment['sentiment_truncated'] = df_sentiment.apply(lambda row: sentiment_truncated(row), axis=1)
-    df_sentiment = df_sentiment[["id", "date", "text","sentiment", "sentiment_truncated"]]
-    df_sentiment.to_csv(output_dir+"/full_tweets_sentiment" +filename, sep=";")
-"""
-    print("calculating main tags classification")
-    df_subjects = df_base
-    df_subjects['subjects_probabilities_array'] = df_subjects.apply(lambda row: subjects_probability_join(row), axis=1)
-    
-    print("calculating main_tags")
-    df_subjects['main_tags'] = df_subjects.apply(lambda row: main_tags_probability_join(row), axis=1)
-    df_subjects['subjects'] = df_subjects.apply(lambda row: subjects_join(row), axis=1)
+    #df_sentiment = df_sentiment[df_sentiment['reply_to'].isnull()]
+    print(df_sentiment.text)
 
-    df_subjects = df_subjects[["id", "date","text", "main_tags","subjects", 'subjects_probabilities_array']]
-    df_subjects.to_csv(output_dir+"/tweets_subjects_" + filename, sep=";")
-"""
+    print("calculating sentiment on each row")
+
+    df_sentiment['sentiment'] = df_sentiment.apply(lambda row: sentiment_row(row), axis=1)
+
+    print("truncating sentiment")
+
+    df_sentiment = df_sentiment[["id", "date", "text","sentiment"]]
+
+    print("saving file")
+
+    df_sentiment.to_csv(output_dir+"/full_tweets_sentiment" +filename, sep=";")
+
     
 if __name__== "__main__":
 
@@ -80,11 +53,12 @@ if __name__== "__main__":
     #empresas_peru.csv
     #ibex35.csv
 
-    filename = "asoc_peru.csv"
+    #filename = "asoc_peru.csv"
     #filename = "asociaciones_empresariales.csv"
     #filename = "empresas_peru.csv"
     #filename = "ibex35.csv"
 
-    df = pd.read_csv(directory+"/"+ filename,sep=",")
-    df['text'] =  df['text'].astype(str)
-    classify_and_sentiment(df, filename)
+    for filename in ["empresas_peru.csv", "ibex35.csv"]:
+        df = pd.read_csv(directory+"/"+ filename,sep=",")
+        df['text'] =  df['text'].astype(str)
+        classify_and_sentiment(df, filename)
