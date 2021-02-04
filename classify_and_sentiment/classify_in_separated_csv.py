@@ -21,11 +21,17 @@ def sentiment_row(row):
 def classify_and_sentiment(df, filename):
     
     df_base = df[["id", "date", "text", "reply_to"]]
+    df_base["text"] = df_base["text"].str.replace(","," ")
+    df_base["text"] = df_base["text"].str.replace(";"," ")
 
     print("calculating sentiment")
     df_sentiment = df_base
-    #∫df_sentiment['text'] = df_sentiment['text'].map(lambda x: x.replace("#"," "))
-    #df_sentiment = df_sentiment[df_sentiment['reply_to'].isnull()]
+
+    print(sentiment.sentiment("hoy estoy feliz, que alegría"))
+    print(sentiment.sentiment("hoy no estoy feliz"))
+    print(sentiment.sentiment("hoy no estoy triste"))
+    print(sentiment.sentiment("hoy estoy triste"))
+
     print(df_sentiment.text)
 
     print("calculating sentiment on each row")
@@ -38,7 +44,7 @@ def classify_and_sentiment(df, filename):
 
     print("saving file")
 
-    df_sentiment.to_csv(output_dir+"/full_tweets_sentiment" +filename, sep=";")
+    df_sentiment.to_csv(output_dir+"/full_tweets_sentiment_ngrams_" +filename, sep=";")
 
     
 if __name__== "__main__":
@@ -58,7 +64,10 @@ if __name__== "__main__":
     #filename = "empresas_peru.csv"
     #filename = "ibex35.csv"
 
-    for filename in ["empresas_peru.csv", "ibex35.csv"]:
+    for filename in ["asoc_peru.csv","asociaciones_empresariales.csv", "empresas_peru.csv", "ibex35.csv"]:
         df = pd.read_csv(directory+"/"+ filename,sep=",")
+        df = df.drop_duplicates(subset=['id'])
+        df = df.drop_duplicates()
+
         df['text'] =  df['text'].astype(str)
         classify_and_sentiment(df, filename)
