@@ -12,10 +12,11 @@ pandas = "*"
 numpy = "*"
 statsmodels = "*"
 matplotlib = "*"
-keras = "*"
+Keras = "*"
 tensorflow = "*"
-sentiment-analysis-spanish = "*"
 subject-classification-spanish = "*"
+tensorflow-gpu = "*"
+sentiment-analysis-spanish = "*"
 
 [requires]
 python_version = "3.7"
